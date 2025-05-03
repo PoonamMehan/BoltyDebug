@@ -29,8 +29,6 @@ export const ChatWithBolty = ()=>{
 
     const {term} = useOutletContext()
     const xtermRef = useRef(null)
-    const [termOpened, setTermOpened] = useState(false)
-    const termRef = useRef(null);
 
 
     useEffect(()=>{console.log("URLh", url)}, [url])
@@ -46,39 +44,39 @@ export const ChatWithBolty = ()=>{
 
     }, [])
 
-    // useEffect(()=>{
-    //     if(codeIsShown){
-    //         xtermRef.current = document.getElementById("terminal")
-    //         console.log("curr", xtermRef.current)
-    //         term?.open(xtermRef.current)
-    //         // setTermOpened(true)
-    //         console.log("term", term)
-    //     }else if(!codeIsShown){
-    //         term?.dispose()
-    //         // setTermOpened(false)
-    //         console.log("curr ref", xtermRef.current)
-    //     }
-    // }, [codeIsShown, xtermRef])
-    useEffect(() => {
-        if (codeIsShown) {
-          const container = xtermRef.current;
-      
-          // Only open if the container exists and term hasn't been opened yet
-          if (container && term) {
-            term.open(container);
-            term.write("Terminal is now visible\r\n");
-          }
-        } else {
-          if (term) {
-            try {
-              term.clear(); // optional: clear instead of dispose if reused elsewhere
-              term.reset();
-            } catch (err) {
-              console.error("Error resetting term:", err);
-            }
-          }
+    useEffect(()=>{
+        if(codeIsShown){
+            xtermRef.current = document.getElementById("terminal")
+            console.log("curr", xtermRef.current)
+            term?.open(xtermRef.current)
+            term.write("Terminal Visible")
+            console.log("term", term)
+        }else if(!codeIsShown){
+            term?.dispose()
+            console.log("curr ref", xtermRef.current)
         }
-      }, [codeIsShown, term]);
+    }, [codeIsShown, xtermRef])
+
+    // useEffect(() => {
+    //     if (codeIsShown) {
+    //       const container = xtermRef.current;
+      
+    //       // Only open if the container exists and term hasn't been opened yet
+    //       if (container && term) {
+    //         term.open(container);
+    //         term.write("Terminal is now visible\r\n");
+    //       }
+    //     } else {
+    //       if (term) {
+    //         try {
+    //           term.clear(); // optional: clear instead of dispose if reused elsewhere
+    //           term.reset();
+    //         } catch (err) {
+    //           console.error("Error resetting term:", err);
+    //         }
+    //       }
+    //     }
+    //   }, [codeIsShown, term]);
 
     async function changeTheFileOpened(filePath){
         console.log("Button clicked")
