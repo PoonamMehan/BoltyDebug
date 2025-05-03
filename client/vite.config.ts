@@ -9,15 +9,15 @@ export default defineConfig({
     tailwindcss()
   ],
   build: {
-      target: "ES2022" 
-    },
-  server: {   
-    // proxy: {
-    //   '/api': {
-    //   target: 'http://localhost:8000',
-    //   changeOrigin: true
-    // }
-    // }, 
+    target: "ES2022" 
+  },
+  server: {
+    proxy: {
+  '/api': {
+    target: 'http://localhost:8000',
+    changeOrigin: true
+  }
+}, 
     headers: {
         "Cross-Origin-Embedder-Policy": "require-corp",
         "Cross-Origin-Opener-Policy": "same-origin"
